@@ -6,7 +6,7 @@ def FrameCapture(path):
     vidObj = cv2.VideoCapture(path)
     success = 1
   
-    while success and count<1000: 
+    while success: 
         success, image = vidObj.read() 
         cv2.imwrite("/home/aman/Desktop/Mini-Project/Frames/frame%d.jpg" % count, image) 
   
