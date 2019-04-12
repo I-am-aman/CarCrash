@@ -9,14 +9,13 @@ counter = 0
 
 for name in glob.glob("/home/aman/Desktop/Mini-Project/FrameFolder*"):
     print(name)
-    num=len([f for f in os.listdir(name)])
-    a=[0]*num
-    b=[0]*num
-    count=0
-    mean=0
-    deviation=0
-    i=0;
-    while i<num-2:
+    numOfFrames = len([f for f in os.listdir(name)])
+    sumOfDiffArray = [0]*numOfFrames
+    count = 0
+    mean = 0
+    deviation = 0
+    i = 0;
+    while i<numOfFrames-2:
         FirstImage=name+"/frame"+str(i)+'.jpg'
         im1 = cv2.imread(FirstImage, cv2.IMREAD_COLOR)
         im1 = cv2.cvtColor(im1, cv2.COLOR_RGB2GRAY)
@@ -30,21 +29,25 @@ for name in glob.glob("/home/aman/Desktop/Mini-Project/FrameFolder*"):
         Difference = abs(FirstArray - SecondArray)
 
         Sum = np.sum(Difference)
-        a[i] = Sum
+        sumOfDiffArray[i] = Sum
         i = i + 1;
 
-    mean = np.mean(a)
-    deviation = np.std(a)
-    th = mean + 1.2 * deviation
+    mean = np.mean(sumOfDiffArray)
+    deviation = np.std(sumOfDiffArray)
+    if numOfFrames < 20:
+        constant = 0.1
+    else:
+        constant = 1.5
 
+    th = constant*mean + deviation
     i = 0
-    while i < num-1:
-        l = int(a[i])
+    while i < numOfFrames-1:
+        l = int(sumOfDiffArray[i])
         if float(l) > th:
             path=name+"/frame"+str(i+1)+'.jpg'
             img = cv2.imread(path,cv2.IMREAD_COLOR)
             cv2.imwrite("/home/aman/Desktop/Mini-Project/KeyFrames/frame{0}.jpg".format(counter), img)
             counter += 1;
-            #print(j)
         i = i + 1
-    #shutil.rmtree(name)
+
+    shutil.rmtree(name)
