@@ -1,48 +1,50 @@
 import cv2
 import numpy as np
-#from matplotlib import pyplot as pt
-#import statistics
-i=0
-S=0
-m3=0
-p=0
-q=0
-a=[0]*1000
-b=[0]*1000
+import os
+import glob
+import shutil
 
-image=cv2.imread("/home/aman/Desktop/Mini-Project/Frames/frame0.jpg",cv2.IMREAD_COLOR)
-cv2.imwrite("/home/aman/Desktop/Mini-Project/Frames/frame0.jpg", image)
-while i<999:
-    im1=cv2.imread("/home/aman/Desktop/Mini-Project/Frames/frame%d.jpg"%i,cv2.IMREAD_COLOR)
-    im1=cv2.cvtColor(im1,cv2.COLOR_RGB2GRAY)
+os.mkdir("KeyFrames")
+counter = 0
 
-    im2=cv2.imread("/home/aman/Desktop/Mini-Project/Frames/frame%d.jpg"%(i+1),cv2.IMREAD_COLOR)
-    im2=cv2.cvtColor(im2,cv2.COLOR_RGB2GRAY)
-    m1=np.array(im1).astype(np.float32)
-    m2=np.array(im2).astype(np.float32)
-    m3=abs(m1-m2)
+for name in glob.glob("/home/aman/Desktop/Mini-Project/FrameFolder*"):
+    print(name)
+    num=len([f for f in os.listdir(name)])
+    a=[0]*num
+    b=[0]*num
+    count=0
+    mean=0
+    deviation=0
+    i=0;
+    while i<num-2:
+        FirstImage=name+"/frame"+str(i)+'.jpg'
+        im1 = cv2.imread(FirstImage, cv2.IMREAD_COLOR)
+        im1 = cv2.cvtColor(im1, cv2.COLOR_RGB2GRAY)
 
-    S=np.sum(m3)
-    a[i]=S
-    i=i+1;
+        SecondImage=name+"/frame"+str(i+1)+'.jpg'
+        im2 = cv2.imread(SecondImage, cv2.IMREAD_COLOR)
+        im2 = cv2.cvtColor(im2, cv2.COLOR_RGB2GRAY)
 
-p=np.mean(a)
-q=np.std(a)
+        FirstArray = np.array(im1).astype(np.float32)
+        SecondArray = np.array(im2).astype(np.float32)
+        Difference = abs(FirstArray - SecondArray)
 
-th=p+2*q
-i=0
-j=0
-while i<1000:
-    l=int(a[i])
-    #print(l,th,p,q)
-    if l>th:
-        img=cv2.imread("/home/aman/Desktop/Mini-Project/Frames/frame{0}.jpg".format(i+1),cv2.IMREAD_COLOR)
-        cv2.imwrite("/home/aman/Desktop/Mini-Project/KeyFrames/frame{0}.jpg".format(j),img)
-        j=j+1;
-    i=i+1
+        Sum = np.sum(Difference)
+        a[i] = Sum
+        i = i + 1;
 
-	
-	
-	
+    mean = np.mean(a)
+    deviation = np.std(a)
+    th = mean + 1.2 * deviation
 
-
+    i = 0
+    while i < num-1:
+        l = int(a[i])
+        if float(l) > th:
+            path=name+"/frame"+str(i+1)+'.jpg'
+            img = cv2.imread(path,cv2.IMREAD_COLOR)
+            cv2.imwrite("/home/aman/Desktop/Mini-Project/KeyFrames/frame{0}.jpg".format(counter), img)
+            counter += 1;
+            #print(j)
+        i = i + 1
+    #shutil.rmtree(name)
