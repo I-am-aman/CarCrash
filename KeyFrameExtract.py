@@ -30,7 +30,7 @@ for name in glob.glob("/home/aman/Desktop/Mini-Project/FrameFolder*"):
 
         Sum = np.sum(Difference)
         sumOfDiffArray[i] = Sum
-        i = i + 1;
+        i = i + 1
 
     mean = np.mean(sumOfDiffArray)
     deviation = np.std(sumOfDiffArray)
@@ -44,10 +44,11 @@ for name in glob.glob("/home/aman/Desktop/Mini-Project/FrameFolder*"):
     while i < numOfFrames-1:
         l = int(sumOfDiffArray[i])
         if float(l) > th:
-            path=name+"/frame"+str(i+1)+'.jpg'
-            img = cv2.imread(path,cv2.IMREAD_COLOR)
+            path = name+"/frame"+str(i+1)+'.jpg'
+            img = cv2.imread(path, cv2.IMREAD_COLOR)
             cv2.imwrite("/home/aman/Desktop/Mini-Project/KeyFrames/frame{0}.jpg".format(counter), img)
-            counter += 1;
+            counter += 1
         i = i + 1
 
     shutil.rmtree(name)
+print(counter)

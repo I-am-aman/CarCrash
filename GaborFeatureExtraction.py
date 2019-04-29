@@ -3,6 +3,7 @@ import numpy as np
 import glob
 import os
 
+
 # define gabor filter bank with different orientations and at different scales
 def build_filters():
     gaborfilters = []
@@ -70,5 +71,5 @@ if __name__ == '__main__':
         counter += 1
 
     print(allKeyFramesFeat)
-    # print(len(allKeyFramesFeat))
+    print(len(allKeyFramesFeat))
 # feat matrix is the feature vector for the image
