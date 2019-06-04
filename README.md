@@ -12,5 +12,5 @@ CarCrash prepares a trained model for the detection of vehicular accidents. This
 
 ## Running the project
 
-Run the VideoClipExtract.py file first which will prepare the CSV file of Bag of Visual Words. This is gonna take a lot of time, depending on the system specifications.<br/>
+Run the VideoClipExtract.py file first which will prepare the CSV file of Bag of Visual Words. This is gonna take a lot of time, depending on the system specifications (You can also directly use the feature_vector.csv and label_vector.csv files that is provided and skip this step).<br/>
 Then different classifiers can be simply run to train and test the model.
