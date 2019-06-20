@@ -7,8 +7,14 @@ CarCrash prepares a trained model for the detection of vehicular accidents. This
 
 ## Installations
 
-* Python 3.3+ or Python 2.7(Preferable)
-* Install [PySceneDetect](https://pyscenedetect.readthedocs.io/en/latest/download/).
+This project requires Python and the following Python libraries installed:
+* [NumPy](https://numpy.org/)
+* [scikit-learn](https://scikit-learn.org/stable/)
+* [FFmpeg-Python](https://pypi.org/project/ffmpeg-python/)
+* [OpenCV](https://opencv.org/)
+* [Matplotlib](https://matplotlib.org/)
+ 
+Also Install [PySceneDetect](https://pyscenedetect.readthedocs.io/en/latest/download/).
 
 ## Running the project
 
