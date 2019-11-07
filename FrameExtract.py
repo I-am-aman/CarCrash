@@ -5,10 +5,11 @@ from glob import glob
 
 folderCounter = 1
 folderBase = "FrameFolder"
-num=0
+num = 0
+
 
 def FrameCapture(path):
-    global folderCounter,num
+    global folderCounter, num
     vidObj = cv2.VideoCapture(path)
     success = 1
     count = 0
@@ -28,4 +29,4 @@ if __name__ == '__main__':
         print(var)
         FrameCapture(var)
     print(num)
-#shutil.rmtree("VideoClips")
+    shutil.rmtree("VideoClips")
