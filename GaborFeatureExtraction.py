@@ -4,8 +4,8 @@ import shutil
 import os
 from sklearn.cluster import KMeans
 from collections import Counter
+import csv
 
-vectorForVideo = []
 
 # define gabor filter bank with different orientations and at different scales
 def build_filters():
@@ -76,11 +76,12 @@ if __name__ == '__main__':
 
     print(allKeyFramesFeat)
     print(len(allKeyFramesFeat))
+    shutil.rmtree("KeyFrames")
 
     kmeans = KMeans(n_clusters=5, random_state=0).fit(allKeyFramesFeat)
     print(kmeans.labels_)
 
-    vectorForVideo.clear()
+    vectorForVideo = []
     for eachCentroid in kmeans.cluster_centers_:
         vectorForVideo.extend(eachCentroid)
 
@@ -92,5 +93,8 @@ if __name__ == '__main__':
 
     print(vectorForVideo)
     print(len(vectorForVideo))
-    shutil.rmtree("KeyFrames")
+
+    with open("feature_vector.csv", 'a') as outfile:
+        writer = csv.writer(outfile, delimiter=' ')
+        writer.writerow(vectorForVideo)
 # feat matrix is the feature vector for the image
