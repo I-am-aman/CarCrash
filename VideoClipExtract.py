@@ -12,11 +12,11 @@ def make_shots(var):
 
 if __name__ == '__main__':
 
-    try:
-        os.remove("feature_vector.csv")
-        os.remove("label_vector.csv")
-    except OSError:
-        pass
+    # try:
+    #     os.remove("feature_vector.csv")
+    #     os.remove("label_vector.csv")
+    # except OSError:
+    #     pass
 
     labelvector = []
 

@@ -74,7 +74,6 @@ if __name__ == '__main__':
         allKeyFramesFeat.append(feat)
         counter += 1
 
-    print(allKeyFramesFeat)
     print(len(allKeyFramesFeat))
     shutil.rmtree("KeyFrames")
 
