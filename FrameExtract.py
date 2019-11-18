@@ -8,6 +8,7 @@ folderBase = "FrameFolder"
 num = 0
 
 
+# Function to extract frames from videos
 def FrameCapture(path):
     global folderCounter, num
     vidObj = cv2.VideoCapture(path)

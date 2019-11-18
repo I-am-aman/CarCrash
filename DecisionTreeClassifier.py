@@ -53,12 +53,14 @@ def cal_accuracy(y_test, y_pred):
 # Driver code
 def main():
     # Building Phase
+    # Reading feature_vector.csv
     with open("feature_vector.csv", 'r') as my_file:
         reader = csv.reader(my_file, delimiter=' ')
         feature_vector = list(reader)
 
     X = [list(map(float, lst)) for lst in feature_vector]
 
+    # Reading label_vector.csv
     with open("label_vector.csv", 'r') as my_file:
         reader = csv.reader(my_file, delimiter=' ')
         label_vector = list(reader)
@@ -66,6 +68,7 @@ def main():
     y_temp_list = [list(map(int, lst)) for lst in label_vector]
     y = [j for sub in y_temp_list for j in sub]
 
+    # Training and Testing the model
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=102)
 
     clf_gini = train_using_gini(X_train, X_test, y_train)

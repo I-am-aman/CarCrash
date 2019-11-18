@@ -50,6 +50,7 @@ if __name__ == '__main__':
         imgg = cv2.imread("/home/aman/Desktop/Mini-Project/KeyFrames/frame{0}.jpg".format(counter), 0)
 
         # initializing the feature vector
+        # feat matrix is the feature vector for the image
         feat = []
 
         # calculating the local energy for each convolved image
@@ -77,6 +78,7 @@ if __name__ == '__main__':
     print(len(allKeyFramesFeat))
     shutil.rmtree("KeyFrames")
 
+    # Clustering
     kmeans = KMeans(n_clusters=5, random_state=0).fit(allKeyFramesFeat)
     print(kmeans.labels_)
 
@@ -93,7 +95,7 @@ if __name__ == '__main__':
     print(vectorForVideo)
     print(len(vectorForVideo))
 
+    # Making feature_vector.csv
     with open("feature_vector.csv", 'a') as outfile:
         writer = csv.writer(outfile, delimiter=' ')
         writer.writerow(vectorForVideo)
-# feat matrix is the feature vector for the image
