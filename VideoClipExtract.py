@@ -6,7 +6,7 @@ import csv
 # Function to make shots
 def make_shots(var):
     os.mkdir("VideoClips")
-    subprocess.run(["scenedetect", "-i", var, "-o", "/home/aman/Desktop/Mini-Project/VideoClips", "detect-content",
+    subprocess.run(["scenedetect", "-i", var,        "-o", "/home/aman/Desktop/Mini-Project/VideoClips", "detect-content",
                     "-t", "27", "split-video"])
 
 

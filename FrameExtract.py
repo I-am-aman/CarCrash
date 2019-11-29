@@ -12,6 +12,10 @@ num = 0
 def FrameCapture(path):
     global folderCounter, num
     vidObj = cv2.VideoCapture(path)
+
+    # fps = vidObj.get(cv2.CAP_PROP_FPS)
+    # print("Frames per second using video.get(cv2.CAP_PROP_FPS) : {0}".format(fps))
+
     success = 1
     count = 0
     folderName = folderBase + str(folderCounter)
@@ -29,5 +33,6 @@ if __name__ == '__main__':
     for var in glob("/home/aman/Desktop/Mini-Project/VideoClips/*.mp4"):
         print(var)
         FrameCapture(var)
+    # FrameCapture("/home/aman/Desktop/Mini-Project/RoadAccident1.mp4")
     print(num)
     shutil.rmtree("VideoClips")
